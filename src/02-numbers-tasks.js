@@ -11,48 +11,51 @@
 /**
  * Returns an area of a rectangle given by width and heigth.
  *
- * @param {numder} width
- * @param {number} height
- * @return {number}
+ @param {numder} width
+ @param {number} height
+ @return {number}
  *
  * @example:
  *   5, 10 => 50
  *   5, 5  => 25
  */
-function getRectangleArea(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleArea(width, height) {
+  const number = width * height;
+  return (number);
 }
 
 
 /**
  * Returns a circumference of circle given by radius.
  *
- * @param {number} radius
- * @return {number}
+ @param {number} radius
+ @return {number}
  *
  * @example:
  *   5    => 31.41592653589793
  *   3.14 => 19.729201864543903
  *   0    => 0
  */
-function getCicleCircumference(/* radius */) {
-  throw new Error('Not implemented');
+function getCicleCircumference(radius) {
+  const circumference = 2 * Math.PI * radius;
+  return (circumference);
 }
 
 /**
  * Returns an average of two given numbers.
  *
- * @param {numder} value1
- * @param {number} value2
- * @return {number}
+ @param {numder} value1
+ @param {number} value2
+ @return {number}
  *
  * @example:
  *   5, 5  => 5
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage(/* value1, value2 */) {
-  throw new Error('Not implemented');
+function getAverage(value1, value2) {
+  const average = (value1) / 2 + (value2) / 2;
+  return (average);
 }
 
 /**
