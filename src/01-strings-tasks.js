@@ -81,91 +81,95 @@ function extractNameFromTemplate(value) {
  *   'John Doe'  => 'J'
  *   'cat'       => 'c'
  */
-function getFirstChar(/* value */) {
-  throw new Error('Not implemented');
+function getFirstChar(value) {
+  return value[0];
 }
 
 /**
  * Removes a leading and trailing whitespace characters from string.
  *
- * @param {string} value
- * @return {string}
- *
+ *@param {string} value
+  @return {string}
+
  * @example
  *   '  Abracadabra'    => 'Abracadabra'
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
+function removeLeadingAndTrailingWhitespaces(value) {
+  return value.trim();
 }
 
 /**
  * Returns a string that repeated the specified number of times.
  *
- * @param {string} value
- * @param {string} count
- * @return {string}
+ @param {string} value
+ @param {string} count
+ @return {string}
  *
  * @example
  *   'A', 5  => 'AAAAA'
  *   'cat', 3 => 'catcatcat'
  */
-function repeatString(/* value, count */) {
-  throw new Error('Not implemented');
+function repeatString(value, count) {
+  return value.repeat(count);
 }
 
 /**
  * Remove the first occurrence of string inside another string
  *
- * @param {string} str
- * @param {string} value
- * @return {string}
+ @param {string} str
+ @param {string} value
+ @return {string}
  *
  * @example
  *   'To be or not to be', 'not'  => 'To be or  to be'
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const temp = str.indexOf(value);
+  if (temp === -1) {
+    return str;
+  }
+  return str.slice(0, temp) + str.slice(temp + value.length);
 }
 
 /**
  * Remove the first and last angle brackets from tag string
  *
- * @param {string} str
- * @return {string}
+ @param {string} str
+ @return {string}
  *
  * @example
  *   '<div>' => 'div'
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.slice(1, -1);
 }
 
 
 /**
  * Converts all characters of the specified string into the upper case
  *
- * @param {string} str
- * @return {string}
+ @param {string} str
+ @return {string}
  *
  * @example
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
-  throw new Error('Not implemented');
+function convertToUpperCase(str) {
+  return str.toUpperCase();
 }
 
 /**
  * Extracts e-mails from single string with e-mails list delimeted by semicolons
  *
- * @param {string} str
- * @return {array}
+ @param {string} str
+ @return {array}
  *
  * @example
  *   'angus.young@gmail.com;brian.johnson@hotmail.com;bon.scott@yahoo.com'
@@ -176,8 +180,8 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
