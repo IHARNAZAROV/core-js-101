@@ -216,11 +216,10 @@ function getRectangleString(/* width, height */) {
  * Encode specified string with ROT13 cipher
  * See details:  https://en.wikipedia.org/wiki/ROT13
  *
- * @param {string} str
- * @return {string}
+ @param {string} str
+ @return {string}
  *
  * @example
- *
  *   'hello' => 'uryyb'
  *   'Why did the chicken cross the road?' => 'Jul qvq gur puvpxra pebff gur ebnq?'
  *   'Gb trg gb gur bgure fvqr!' => 'To get to the other side!'
@@ -228,14 +227,18 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const codestr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const encodestr = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  return str.split('').map((chisl) => {
+    const temp = codestr.indexOf(chisl);
+    return temp === -1 ? chisl : encodestr[temp];
+  }).join('');
 }
-
 /**
  * Returns true if the value is string; otherwise false.
- * @param {string} value
- * @return {boolean}
+ @param {string} value
+ @return {boolean}
  *
  * @example
  *   isString() => false
@@ -245,8 +248,8 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  return value instanceof String || typeof value === 'string';
 }
 
 
