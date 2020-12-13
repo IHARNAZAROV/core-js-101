@@ -37,8 +37,8 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  * Return Promise object that should be resolved with array containing plain values.
  * Function receive an array of Promise objects.
  *
- * @param {Promise[]} array
- * @return {Promise}
+ @param {Promise[]} array
+ @return {Promise}
  *
  * @example
  *    const promises = [Promise.resolve(1), Promise.resolve(3), Promise.resolve(12)]
@@ -48,8 +48,8 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
+function processAllPromises(array) {
+  return Promise.all(array);
 }
 
 /**
@@ -57,8 +57,8 @@ function processAllPromises(/* array */) {
  * Promise object that will be resolved first.
  * Function receive an array of Promise objects.
  *
- * @param {Promise[]} array
- * @return {Promise}
+ @param {Promise[]} array
+ @return {Promise}
  *
  * @example
  *    const promises = [
@@ -71,8 +71,8 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
+function getFastestPromise(array) {
+  return Promise.race(array);
 }
 
 /**
@@ -80,9 +80,9 @@ function getFastestPromise(/* array */) {
  * a result of action with values of all the promises that exists in array.
  * If some of promise is rejected you should catch it and process the next one.
  *
- * @param {Promise[]} array
- * @param {Function} action
- * @return {Promise}
+ @param {Promise[]} array
+ @param {Function} action
+ @return {Promise}
  *
  * @example
  *    const promises = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)];
@@ -92,9 +92,20 @@ function getFastestPromise(/* array */) {
  *    });
  *
  */
-function chainPromises(/* array, action */) {
-  throw new Error('Not implemented');
+function chainPromises(array, action) {
+  return new Promise((resolve) => {
+    let chain = Promise.resolve();
+    const res = [];
+    array.forEach((item) => {
+      chain = chain
+        .then(() => item)
+        .then((el) => res.push(el))
+        .catch((e) => JSON.stringify(e));
+    });
+    chain.then(() => res).then((arr) => resolve(arr.reduce(action)));
+  });
 }
+
 
 module.exports = {
   willYouMarryMe,

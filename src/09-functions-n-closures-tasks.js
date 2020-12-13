@@ -15,24 +15,26 @@
  * which works like applying function f to the result of applying function g to x, i.e.
  *  getComposition(f,g)(x) = f(g(x))
  *
- * @param {Function} f
- * @param {Function} g
- * @return {Function}
+ @param {Function} f
+ @param {Function} g
+ @return {Function}
  *
  * @example
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
+function getComposition(f, g) {
+  return function comp(x) {
+    return f(g(x));
+  };
 }
 
 
 /**
  * Returns the math power function with the specified exponent
  *
- * @param {number} exponent
- * @return {Function}
+ @param {number} exponent
+ @return {Function}
  *
  * @example
  *   const power2 = getPowerFunction(2); // => x^2
@@ -44,8 +46,10 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return function exp(n) {
+    return (n ** exponent);
+  };
 }
 
 
@@ -53,8 +57,8 @@ function getPowerFunction(/* exponent */) {
  * Returns the polynom function of one argument based on specified coefficients.
  * See: https://en.wikipedia.org/wiki/Polynomial#Definition
  *
- * @params {integer}
- * @return {Function}
+ @params {integer}
+ @return {Function}
  *
  * @example
  *   getPolynom(2,3,5) => y = 2*x^2 + 3*x + 5
@@ -62,17 +66,37 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...args) {
+  if (args.length === 3) {
+    const [a, b, c] = args;
+    return function pol(x) {
+      return a * (x ** 2) + (x * b) + c;
+    };
+  }
+  if (args.length === 2) {
+    const [a, b] = args;
+
+    return function pol(x) {
+      return a * x + b;
+    };
+  }
+  if (args.length === 1) {
+    const [a] = args;
+
+    return function pol() {
+      return a;
+    };
+  }
+  return function pol() {
+    return null;
+  };
 }
-
-
 /**
  * Memoizes passed function and returns function
  * which invoked first time calls the passed function and then always returns cached result.
  *
  * @params {Function} func - function to memoize
- * @return {Function} memoized function
+ @return {Function} memoized function
  *
  * @example
  *   const memoizer = memoize(() => Math.random());
@@ -81,8 +105,13 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  let cache = null;
+
+  return function mem() {
+    if (!cache) cache = func();
+    return cache;
+  };
 }
 
 
@@ -90,9 +119,9 @@ function memoize(/* func */) {
  * Returns the function trying to call the passed function and if it throws,
  * retrying it specified number of attempts.
  *
- * @param {Function} func
- * @param {number} attempts
- * @return {Function}
+ @param {Function} func
+ @param {number} attempts
+ @return {Function}
  *
  * @example
  * const attempt = 0, retryer = retry(() => {
@@ -101,8 +130,16 @@ function memoize(/* func */) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  const errorLog = [];
+  return () => {
+    for (let i = 0; i < attempts; i += 1) {
+      try {
+        return func();
+      } catch (err) { errorLog.push(err); }
+    }
+    return null;
+  };
 }
 
 
@@ -137,8 +174,8 @@ function logger(/* func, logFunc */) {
 /**
  * Return the function with partial applied arguments
  *
- * @param {Function} fn
- * @return {Function}
+ @param {Function} fn
+ @return {Function}
  *
  * @example
  *   const fn = function(x1,x2,x3,x4) { return  x1 + x2 + x3 + x4; };
@@ -147,8 +184,10 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...outers) {
+  return function arg(...inners) {
+    return fn(...outers, ...inners);
+  };
 }
 
 
@@ -156,8 +195,8 @@ function partialUsingArguments(/* fn, ...args1 */) {
  * Returns the id generator function that returns next integer starting
  * from specified number every time when invoking.
  *
- * @param {Number} startFrom
- * @return {Function}
+ *@param {Number} startFrom
+ *@return {Function}
  *
  * @example
  *   const getId4 = getIdGenerator(4);

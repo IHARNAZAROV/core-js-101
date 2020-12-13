@@ -266,8 +266,8 @@ function isString(value) {
  * (see https://en.wikipedia.org/wiki/Standard_52-card_deck)
  * Function returns the zero-based index of specified card in the initial deck above.
  *
- * @param {string} value
- * @return {number}
+ @param {string} value
+ @return {number}
  *
  * @example
  *   'A♣' => 0
@@ -277,8 +277,12 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const suits = '♣♦♥♠';
+  const ranks = 'A234567891JQK';
+  const suit = value[value.length - 1];
+  const rank = value[0];
+  return suits.indexOf(suit) * 13 + ranks.indexOf(rank);
 }
 
 

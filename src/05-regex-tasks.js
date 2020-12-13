@@ -29,10 +29,10 @@
  *   '0c74f13f-fa83-4c48-9b33-68921dd72463'
  *   'The roof, the roof, the roof is on fire'
  *
- * @return {RegExp}
+ @return {RegExp}
  */
 function getRegexForGuid() {
-  throw new Error('Not implemented');
+  return /\{[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}\}/;
 }
 
 
@@ -50,11 +50,11 @@ function getRegexForGuid() {
  *
  * NOTE : the regex length should be < 13
  *
- * @return {RegExp}
+ @return {RegExp}
  *
  */
 function getRegexForPitSpot() {
-  throw new Error('Not implemented');
+  return /^(pi|r|s)/;
 }
 
 
@@ -65,10 +65,10 @@ function getRegexForPitSpot() {
  *  - Contains a lowercase letter
  *  - Contains an uppercase letter
  *  - Contains a number
- *  - Valid passwords will only be alphanumeric characters (+ underscore).
+ *  - Valid passwords will only be alphanumeric characters.
  *
- * @param {number} minLength
- * @return {Regex}
+ @param {number} minLength
+ @return {Regex}
  *
  * @example
  *   let validator = getPasswordValidator(6);
@@ -78,8 +78,8 @@ function getRegexForPitSpot() {
  *   'PASSW0RD'.match(validator)  => false
  *   'Pa55'.match(validator) => false
  */
-function getPasswordValidator(/* minLength */) {
-  throw new Error('Not implemented');
+function getPasswordValidator(minLength) {
+  return new RegExp(`^(?=[0-9A-Za-z]{${minLength},})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])`);
 }
 
 
